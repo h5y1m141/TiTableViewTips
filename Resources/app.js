@@ -1,6 +1,7 @@
 var myApps = {};
+myApps.uiparts = {};
 myApps.ui = require('ui/ui');
-myApps.tableView = require('ui/tableView');
+myApps.ui.tableView = require('ui/tableView');
 
 (function(){
   var entries = [
@@ -26,15 +27,40 @@ myApps.tableView = require('ui/tableView');
       title:"タイトル4"
     }
   ];
-  myApps.ui.tableView = myApps.tableView.init();
+
+  myApps.uiparts.mainTable = myApps.ui.tableView.init('tableView');
   var rows = [];
   for(var i=0;i<entries.length;i++){
     var entry = entries[i];
     var row = myApps.ui.createEntryRow(entry);
     rows.push(row);
-    myApps.tableView.setTableData(rows);
+    myApps.ui.tableView.setTableData(myApps.uiparts.mainTable,rows);
   }
-  myApps.ui.addElement(myApps.ui.tableView);
+
+  myApps.uiparts.bloggerList = myApps.ui.tableView.init('tableViewWhite');
+  var listData = [
+    {'name':'yokota'},
+    {'name':'kanazawa'},
+    {'name':'mitani'},
+    {'name':'ohashi'},
+    {'name':'uehara'},
+    {'name':'oyamada'}
+  ];
+  var $$ = require('ui/styles').prop;
+  var bloggerTable = Ti.UI.createTableView($$.bloggerTable);
+
+  for(var j=0;j<listData.length;j++){
+    var blogger = listData[j];
+    var row1 = myApps.ui.createBloggerRow(blogger);
+    bloggerTable.appendRow(row1);
+  }
+
+
+  myApps.ui.addElement(myApps.uiparts.mainTable);
+  myApps.ui.addElement(bloggerTable);
+
   myApps.ui.createMainWindow();
+
+
 
 }).call(this);

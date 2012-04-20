@@ -1,8 +1,10 @@
 var $$ = require('ui/styles').prop;
-var tableView = Ti.UI.createTableView($$.tableView);
+
 
 var exports = {
-  init:function(){
+  init:function(option){
+    var tableViewStyle = option||tableView;
+    var tableView = Ti.UI.createTableView($$[tableViewStyle]);
 
     tableView.addEventListener('click',function(e){
       var index = e.index;
@@ -44,8 +46,8 @@ var exports = {
     return tableView;
   },
 
-  setTableData:function(/*array*/ data){
-    return tableView.setData(data,{
+  setTableData:function(table,/*array*/ data){
+    return table.setData(data,{
       animated:true,
       animationStyle:Titanium.UI.iPhone.RowAnimationStyle.DOWN
     });

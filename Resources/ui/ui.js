@@ -1,4 +1,24 @@
 var exports = {
+  createBloggerRow:function(/* json */ blogger){
+
+    var row = Ti.UI.createTableViewRow($$.bloggerRow);
+    var switchBtn = Ti.UI.createSwitch($$.switchBtn);
+    switchBtn.blogger = blogger.name;
+    switchBtn.addEventListener('change',function(e){
+      Ti.API.info('Switch value = ' + e.value
+                  + ' act val ' + switchBtn.blogger);
+    });
+
+    row.add(switchBtn);
+
+    var icon_iamge = Ti.UI.createImageView($$.iconImage);
+    icon_iamge.image = '/ui/images/' + blogger.name + '.gif';
+    row.add(icon_iamge);
+
+    row.text = blogger.name;
+    return row;
+
+  },
   createComposeRow :function(){
     var row = Ti.UI.createTableViewRow($$.viewRow);
     row.showd = true;
@@ -19,8 +39,6 @@ var exports = {
     row.add(tweet);
 
     return row;
-
-
 
   },
   createEntryRow :function(/* JSON */ entry){
@@ -84,28 +102,28 @@ var exports = {
 
     win.title = 'あすなろBLOG';
     win.rightNavButton = (function(){
-      var button = Titanium.UI.createButton($$.configBtn);
+      var button = Titanium.UI.createButton($$.refreshBtn);
       button.addEventListener('click', function() {
       });
       return button;
     })();
 
     win.leftNavButton = (function(){
-      var button = Titanium.UI.createButton($$.refreshBtn);
+      var button = Titanium.UI.createButton($$.listBtn);
       button.addEventListener('click', function() {
-      Ti.API.info(myApps.ui.tableView.moved);
-      if(!myApps.ui.tableView.moved){
-        myApps.ui.tableView.animate({
+      Ti.API.info(myApps.uiparts.mainTable.moved);
+      if(!myApps.uiparts.mainTable.moved){
+        myApps.uiparts.mainTable.animate({
           duration:180,
-          left:100
+          left:200
         });
-        myApps.ui.tableView.moved = true;
+        myApps.uiparts.mainTable.moved = true;
       }else{
-        myApps.ui.tableView.animate({
+        myApps.uiparts.mainTable.animate({
           duration:180,
           left:0
         });
-        myApps.ui.tableView.moved = false;
+        myApps.uiparts.mainTable.moved = false;
       }
 
       });

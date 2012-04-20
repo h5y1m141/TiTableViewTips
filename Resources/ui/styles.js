@@ -25,9 +25,20 @@ var theme = {
     endPoint: { x: '50%', y: '100%' },
     colors: [
       { color: '#000', offset: 0.0},
-      { color: '#333', offset: 0.3},
-      { color: '#666', offset: 0.9},
+      { color: '#222', offset: 0.1},
+      { color: '#222', offset: 0.9},
       { color: '#000', offset: 1.0}
+    ]
+  },
+  tableViewWhiteGradient: {
+    type: 'linear',
+    startPoint: { x: '50%', y: '0%' },
+    endPoint: { x: '50%', y: '100%' },
+    colors: [
+      { color: '#DDD', offset: 0.0},
+      { color: '#FFF', offset: 0.1},
+      { color: '#FFF', offset: 0.9},
+      { color: '#DDD', offset: 1.0}
     ]
   }
 
@@ -53,16 +64,24 @@ var prop = {
     tabBarHidden:true
  },
   label : {
-    color:'#FFF',
+    color:'#333',
     textAlign:theme.textAlign,
     width:theme.width
   },
   viewRow:{
     width:'auto',
-    borderWidth:3,
+    borderWidth:1,
+    borderColor:'#FFF',
+    backgroundGradient:theme.tableViewWhiteGradient,
+    height:80
+  },
+  bloggerRow:{
+    width:'auto',
+    borderWidth:2,
     borderColor:'#000',
     backgroundGradient:theme.tableViewGradient,
-    height:80
+    color:'#fff',
+    height:60
   },
 
   entrySummary:{
@@ -70,7 +89,7 @@ var prop = {
       fontSize:12
     },
     left:75,
-    color:'#fff',
+    color:'#333',
     top:40,
     width:200,
     height:40
@@ -80,7 +99,7 @@ var prop = {
       fontWeight:'bold',
       fontSize:16
     },
-    color:'#fff',
+    color:'#000',
     left:65,
     top:10,
     width:200,
@@ -127,9 +146,15 @@ var prop = {
     opacity:0.5
   },
   tableView:{
-    backgroundGradient:theme.backgroundGradient,
-    separatorColor: '#333',
-    moved: false
+    backgroundGradient:theme.tableViewWhiteGradient,
+    separatorColor: '#999',
+    moved: false,
+    zIndex:2
+  },
+  bloggerTable:{
+    backgroundGradient:theme.tableViewGradient,
+    separatorColor: '#000',
+    zIndex:1
   },
   webViewLabel:{
     font:{
@@ -189,7 +214,17 @@ var prop = {
     width:25,
     height:25,
     backgroundImage:'/ui/parts/config.png'
-
+  },
+  listBtn:{
+    width:25,
+    height:25,
+    systemButton: Titanium.UI.iPhone.SystemButton.BOOKMARKS
+  },
+  switchBtn:{
+    left:100,
+    value:false,
+    titleOn:'購読する',
+    titleOff: '購読しない'
   },
   // tableView refresh function
   border:{
